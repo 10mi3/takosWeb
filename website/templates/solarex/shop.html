@@ -1,0 +1,115 @@
+{% extends 'solarex/base.html' %}
+{% load static %}
+{% load category_template_tags %}
+
+
+{% block content %}
+    <div id="main-wrapper" class="wrapper-hidden z-index-100" style="margin-top: 50px">
+        <div class="container">
+
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+                        <div class="col-lg-6 mx-auto">
+                            <div class="text-center">
+                                <span class="site-title-tagline">Nos Produits</span>
+                                <h6 class="shop-item-title"></h6>
+                                <div class="heading-divider"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {#        <div class="row">#}
+            {#            <div class="col-lg-6 mx-auto">#}
+            {#                <div class="site-heading text-center">#}
+            {#                    <span class="site-title-tagline">Nos Produits</span>#}
+            {#                    <h6 class="shop-item-title"></h6>#}
+            {#                    <div class="heading-divider"></div>#}
+            {#                </div>#}
+            {#            </div>#}
+            {#        </div>#}
+            <!-- header here --><!-- Title Page -->
+            <!-- Content page -->
+
+            <section class="py-5">
+                <div class="container p-0">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                                <div class="leftbar p-r-20 p-r-0-sm">
+                                <!--  -->
+                                <h5 class="text-uppercase mb-4 site-title-tagline" style="position: relative;
+    display: block;
+    padding: .4em .4em .4em 2em;
+    margin: .5em 0;
+    background: #f8f9fa;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;">Categories</h5>
+
+                                <div class="py-1 px-0 mb-6">
+                                    <strong>{% categories_li_a %}</strong>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                            <!--  -->
+
+
+                            <!-- Product -->
+                            <div class="row">
+                                {% for item in object_list %}
+                                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                                        <!-- Block2 -->
+                                        <div class="block2">
+                                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                                <img src="{{ item.image.url }}" alt="IMG-PRODUCT"
+                                                     style="height: 300px;">
+
+                                            </div>
+
+                                            <div class="product text-center">
+                                                <h6><a class="reset-anchor"
+                                                       href="{{ item.get_absolute_url }}">{{ item.title }}</a></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+                            <!-- ---- row end ------- -->
+
+                            <br>
+                            <!-- Pagination -->
+                            {% if is_paginated %}
+                                <div class="pagination flex-m flex-w p-t-26">
+                                    {% if page_obj.has_previous %}
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    {% endif %}
+                                    <a href="?page={{ page_obj.number }}"
+                                       class="item-pagination flex-c-m trans-0-4 active-pagination">{{ page_obj.number }}</a>
+
+
+                                    {% if page_obj.has_next %}
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock content %}
